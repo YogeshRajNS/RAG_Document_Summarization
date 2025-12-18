@@ -175,8 +175,14 @@ class SearchEngine:
         # Remove duplicates while preserving order
         return list(dict.fromkeys(results))[:top_k]
 
-engine = SearchEngine()
+# engine = SearchEngine()
+engine = None
 
+def get_engine():
+    global engine
+    if engine is None:
+        engine = SearchEngine()
+    return engine
 # ---------------- GEMINI ----------------
 
 def summarize(text, length):
@@ -416,3 +422,4 @@ if __name__ == "__main__":
     port = int(os.getenv("PORT", 8000))
 
     app.run(host="0.0.0.0", port=port, debug=False)
+
