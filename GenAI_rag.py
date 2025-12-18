@@ -19,12 +19,12 @@ CHROMA_DIR = "./chroma_store"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 # Use environment variable for API key (for deployment)
-# genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 # For local testing, uncomment below and comment above
-with open("api.json") as f:
-    api = json.load(f)
-genai.configure(api_key=api["api_key"])
+# with open("api.json") as f:
+#     api = json.load(f)
+# genai.configure(api_key=api["api_key"])
 
 # ---------------- UTILS ----------------
 
@@ -414,4 +414,5 @@ def run_test_suite():
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 8000))
+
     app.run(host="0.0.0.0", port=port, debug=False)
