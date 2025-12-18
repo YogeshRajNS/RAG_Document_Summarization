@@ -22,7 +22,7 @@ rouge-score
 nltk
 
 # API Requests (for frontend)
-requests==2.31.0
+requests
 
 # Additional utilities
-python-dotenv==1.0.0
+python-dotenv
