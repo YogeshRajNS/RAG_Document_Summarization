@@ -6,6 +6,9 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from sklearn.feature_extraction.text import TfidfVectorizer
 import google.generativeai as genai
+from sentence_transformers import SentenceTransformer
+import chromadb
+import fitz
 
 # ---------------- CONFIG ----------------
 
@@ -110,8 +113,6 @@ def evaluate_search_relevance(retrieved_docs, expected_doc_content):
 
 class SearchEngine:
     def __init__(self):
-        from sentence_transformers import SentenceTransformer
-        import chromadb
 
         self.embedder = SentenceTransformer("all-MiniLM-L6-v2")
         self.client = chromadb.PersistentClient(path="./chroma_store")
@@ -124,7 +125,6 @@ class SearchEngine:
 
     def ingest_pdf(self, path, name):
         """Ingest PDF, chunk it, and store in vector database"""
-        import fitz
         pdf = fitz.open(path)
         texts = []
 
@@ -429,6 +429,7 @@ if __name__ == "__main__":
     port = int(os.getenv("PORT", 8000))
 
     app.run(host="0.0.0.0", port=port, debug=False)
+
 
 
 
